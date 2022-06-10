@@ -146,11 +146,11 @@ export class TokenProgramService {
     })
     transaction.add(createAccountInstruction)
 
-    const initialOwnerTokenAddress = await TokenProgramService.findAssociatedTokenAddress(
+    const initialOwnerTokenAddress = this.findAssociatedTokenAddress(
       initialOwnerAddress,
       tokenMintAccount.publicKey,
     )
-    const createATAInstruction = await TokenProgramInstructionService.createAssociatedTokenAccount(
+    const createATAInstruction = TokenProgramInstructionService.createAssociatedTokenAccount(
       payerAccount.publicKey,
       initialOwnerAddress,
       tokenMintAccount.publicKey,
@@ -187,7 +187,10 @@ export class TokenProgramService {
     ownerAddress: PublicKey,
     tokenMintAddress: PublicKey,
   ): Promise<PublicKey> {
-    const tokenAccountAddress = await TokenProgramService.findAssociatedTokenAddress(ownerAddress, tokenMintAddress)
+    const tokenAccountAddress = this.findAssociatedTokenAddress(
+      ownerAddress,
+      tokenMintAddress,
+    )
     if (await SolanaService.isAddressInUse(connection, tokenAccountAddress)) {
       console.log(`SKIPPED: Associated Token Account ${tokenAccountAddress.toBase58()} of Account ${ownerAddress.toBase58()} is already existed`, '\n')
       return tokenAccountAddress
@@ -195,7 +198,7 @@ export class TokenProgramService {
 
     const transaction = new Transaction()
 
-    const createATAInstruction = await TokenProgramInstructionService.createAssociatedTokenAccount(
+    const createATAInstruction = TokenProgramInstructionService.createAssociatedTokenAccount(
       payerAccount.publicKey,
       ownerAddress,
       tokenMintAddress,
@@ -209,19 +212,14 @@ export class TokenProgramService {
     return tokenAccountAddress
   }
 
-  static async findAssociatedTokenAddress(
+  static findAssociatedTokenAddress(
     walletAddress: PublicKey,
     tokenMintAddress: PublicKey,
-  ): Promise<PublicKey> {
-    const [address, ] = await PublicKey.findProgramAddress(
-      [
-        walletAddress.toBuffer(),
-        TOKEN_PROGRAM_ID.toBuffer(),
-        tokenMintAddress.toBuffer(),
-      ],
-      ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID
-    );
-    return address
+  ): PublicKey {
+    return TokenProgramInstructionService.findAssociatedTokenAddress(
+      walletAddress,
+      tokenMintAddress,
+    )
   }
 
   static async findRecipientTokenAddress(
@@ -234,12 +232,12 @@ export class TokenProgramService {
     let createATAInstruction: TransactionInstruction = null
     const recepientType = await this.checkAddressType(connection, recipientAddress)
     if (recepientType === 1) {
-      const associatedTokenAccountAddress = await this.findAssociatedTokenAddress(
+      const associatedTokenAccountAddress = this.findAssociatedTokenAddress(
         recipientAddress,
         tokenMintAddress,
       )
       if (!await SolanaService.isAddressInUse(connection, associatedTokenAccountAddress)) {
-        createATAInstruction = await TokenProgramInstructionService.createAssociatedTokenAccount(
+        createATAInstruction = TokenProgramInstructionService.createAssociatedTokenAccount(
           payerAddress,
           recipientAddress,
           tokenMintAddress,
@@ -294,12 +292,12 @@ export class TokenProgramService {
     for(let i = 0; i < tokenMintAddresses.length; i++) {
       const tokenMintAddress = tokenMintAddresses[i]
       const filteredTokenAccountInfos = tokenAccountInfos.filter(accountInfo => accountInfo.mint.toBase58() === tokenMintAddress.toBase58())
-      const associatedTokenAccountAddress = await TokenProgramService.findAssociatedTokenAddress(
+      const associatedTokenAccountAddress = this.findAssociatedTokenAddress(
         userAccount.publicKey,
         tokenMintAddress,
       )
       if (!filteredTokenAccountInfos.some(accountInfo => accountInfo.address.toBase58() === associatedTokenAccountAddress.toBase58())) {
-        const createATAInstruction = await TokenProgramInstructionService.createAssociatedTokenAccount(
+        const createATAInstruction = TokenProgramInstructionService.createAssociatedTokenAccount(
           payerAccount.publicKey,
           userAccount.publicKey,
           tokenMintAddress,

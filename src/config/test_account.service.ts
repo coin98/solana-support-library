@@ -1,6 +1,6 @@
 import { Keypair } from '@solana/web3.js';
 import path from 'path';
-import { FileSystemService } from './file_system.service';
+import { FileSystemService } from '../core/file_system.service';
 import { SolanaConfigService } from './solana_config.service';
 
 export class TestAccountService {
@@ -63,7 +63,7 @@ export class TestAccountService {
 async function getExistAccountOrCreateNew(
   fileName: string
 ): Promise<Keypair> {
-  const accountPath = path.join(__dirname, '..', '..', 'shared_accounts', fileName)
+  const accountPath = path.join('shared_accounts', fileName)
   const isAccountExists = await FileSystemService.exists(accountPath)
   const account = isAccountExists
     ? await SolanaConfigService.readAccountFromFile(accountPath)

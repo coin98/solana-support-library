@@ -263,12 +263,15 @@ export class TokenProgramInstructionService {
     })
   }
 
-  static async createAssociatedTokenAccount(
+  static createAssociatedTokenAccount(
     payerAddress: PublicKey,
     ownerAddress: PublicKey,
     tokenMintAddress: PublicKey,
-  ): Promise<TransactionInstruction> {
-    const tokenAccountAddress = await TokenProgramInstructionService.findAssociatedTokenAddress(ownerAddress, tokenMintAddress)
+  ): TransactionInstruction {
+    const tokenAccountAddress = this.findAssociatedTokenAddress(
+      ownerAddress,
+      tokenMintAddress,
+    )
     const request = <CreateAssociatedTokenAccountRequest>{}
     const keys: AccountMeta[] = [
       <AccountMeta>{ pubkey: payerAddress, isSigner: true, isWritable: true },
@@ -514,11 +517,11 @@ export class TokenProgramInstructionService {
     return BorshService.deserialize(TRANSFER_LAYOUT, data)
   }
 
-  static async findAssociatedTokenAddress(
+  static findAssociatedTokenAddress(
     walletAddress: PublicKey,
     tokenMintAddress: PublicKey,
-  ): Promise<PublicKey> {
-    const [address, ] = await PublicKey.findProgramAddress(
+  ): PublicKey {
+    const [address, ] = PublicKey.findProgramAddressSync(
       [
         walletAddress.toBuffer(),
         TOKEN_PROGRAM_ID.toBuffer(),
