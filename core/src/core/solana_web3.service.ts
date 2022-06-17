@@ -5,7 +5,7 @@ import {
   Transaction
 } from '@solana/web3.js'
 
-export async function getTransactionReturn(
+export async function getProgramReturn(
   connection: Connection,
   txHash: string,
 ): Promise<string> {
