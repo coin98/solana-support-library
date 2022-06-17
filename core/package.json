@@ -1,6 +1,6 @@
 {
   "name": "@coin98/solana-support-library",
-  "version": "0.1.2",
+  "version": "0.2.4",
   "description": "Solana Support Library for web3.js",
   "author": "Lukaz",
   "license": "Apache-2.0",
@@ -9,7 +9,8 @@
   "exports": {
     ".": "./dist/index.js",
     "./core": "./dist/core/index.js",
-    "./config": "./dist/config/index.js"
+    "./config": "./dist/config/index.js",
+    "./helpers": "./dist/helpers/index.js"
   },
   "scripts": {
     "build": "tsc --build"
@@ -29,6 +30,7 @@
     "yaml": "^2.1.0"
   },
   "devDependencies": {
+    "@types/bn.js": "^5.1.0",
     "@types/mz": "^2.7.4",
     "@types/numeral": "^2.0.2",
     "@types/yaml": "^1.9.7",

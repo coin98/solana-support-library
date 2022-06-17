@@ -1,6 +1,6 @@
 {
   "name": "@coin98/solana-support-library",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "Solana Support Library for web3.js",
   "author": "Coin98",
   "license": "Apache-2.0",
@@ -27,6 +27,7 @@
     "yaml": "^2.1.0"
   },
   "devDependencies": {
+    "@types/bn.js": "^5.1.0",
     "@types/mz": "^2.7.4",
     "@types/numeral": "^2.0.2",
     "@types/yaml": "^1.9.7",
