@@ -25,12 +25,18 @@ export async function sendTransaction(
   transaction: Transaction,
   signers: Signer[],
 ): Promise<string> {
-  return sendAndConfirmTransaction(
-    connection,
-    transaction,
-    signers,
-    {
-      skipPreflight: true,
-    },
-  )
+  try {
+    return sendAndConfirmTransaction(
+      connection,
+      transaction,
+      signers,
+      {
+        skipPreflight: true,
+      },
+    )
+  } catch(err) {
+    // print log messages to console
+    console.debug(err)
+    throw err
+  }
 }

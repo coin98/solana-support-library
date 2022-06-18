@@ -1,2 +1,2 @@
 export { SolanaConfigService } from './solana_config.service'
-export { TestAccountService } from './test_account.service'
+export { TestAccountService, TokenName } from './test_account.service'

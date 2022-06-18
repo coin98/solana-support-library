@@ -4,9 +4,12 @@ import { FileSystemService } from '../core/file_system.service';
 import { SolanaConfigService } from './solana_config.service';
 
 export class TestAccountService {
-  static async getAccount(num: number
+  static async getAccount(
+    num: number,
   ): Promise<Keypair> {
     switch(num) {
+      case 0:
+        return Keypair.fromSecretKey(Uint8Array.from([46,65,79,135,17,235,62,170,138,250,37,6,218,61,184,106,19,149,245,54,234,41,37,118,76,181,234,82,237,244,93,201,110,134,224,91,83,45,112,151,22,166,164,229,140,3,5,26,206,25,240,219,57,78,235,214,112,45,54,90,237,167,118,113]))
       case 1:
         return Keypair.fromSecretKey(Uint8Array.from([104,50,235,9,64,139,20,154,193,211,121,6,193,239,93,24,236,68,114,116,108,19,138,180,151,2,35,84,239,114,13,171,142,216,25,84,78,168,1,193,90,234,206,34,168,124,173,173,211,60,79,50,122,238,134,15,141,232,255,102,82,192,19,131]))
       case 2:
@@ -29,12 +32,14 @@ export class TestAccountService {
     return getExistAccountOrCreateNew(`test_account_${num}.json`)
   }
 
-  static async getProgramAccount(num: number
+  static async getProgramAccount(
+    num: number,
   ): Promise<Keypair> {
     return getExistAccountOrCreateNew(`program_account_${num}.json`)
   }
 
-  static async getTokenAccount(num: number
+  static async getTokenAccount(
+    num: number,
   ): Promise<Keypair> {
     switch(num) {
       case 1:
@@ -58,6 +63,28 @@ export class TestAccountService {
     }
     return getExistAccountOrCreateNew(`token_account_${num}.json`)
   }
+
+  static getNamedTokenAccount(
+    tokenName: TokenName,
+  ): Keypair {
+    switch(tokenName) {
+      case TokenName.C98:
+        return Keypair.fromSecretKey(Uint8Array.from([162,155,104,171,129,102,129,160,196,161,49,52,96,229,195,29,63,232,142,79,163,97,51,36,109,156,118,190,16,128,237,218,171,41,42,208,25,96,5,0,70,164,180,81,25,45,171,175,214,150,230,106,149,103,49,37,237,35,56,35,89,90,223,64]))
+      case TokenName.CUSD:
+        return Keypair.fromSecretKey(Uint8Array.from([202,192,162,73,184,144,236,61,88,204,128,42,118,116,110,72,153,114,57,183,67,59,239,160,46,130,112,92,219,145,116,21,171,46,92,155,111,121,107,137,187,201,219,116,208,23,156,137,19,146,184,45,122,164,241,252,184,1,174,7,13,160,189,174]))
+      case TokenName.USDC:
+        return Keypair.fromSecretKey(Uint8Array.from([60,231,165,208,225,90,117,100,22,235,253,243,161,9,223,54,139,142,78,108,18,22,88,83,16,154,198,212,38,116,83,178,7,7,47,239,146,149,227,157,134,184,142,41,0,116,30,156,5,137,155,122,200,7,156,95,250,65,130,110,210,224,109,43]))
+      case TokenName.USDT:
+        return Keypair.fromSecretKey(Uint8Array.from([236,151,173,254,101,155,109,246,177,10,166,118,56,248,241,61,84,92,28,161,223,117,27,144,129,53,9,117,125,57,62,44,7,7,49,61,169,163,25,74,204,125,53,179,167,62,142,96,45,254,128,12,28,221,99,113,229,80,145,215,86,94,211,20]))
+    }
+  }
+}
+
+export enum TokenName {
+  C98,
+  CUSD,
+  USDC,
+  USDT,
 }
 
 async function getExistAccountOrCreateNew(
