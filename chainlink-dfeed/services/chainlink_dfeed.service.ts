@@ -17,7 +17,7 @@ import {
 } from './chainlink_dfeed_instruction.service';
 
 export class ChainlinkDfeedService {
-  static async cteateFeed(
+  static async createFeed(
     connection: Connection,
     payerAccount: Keypair,
     feedName: string,

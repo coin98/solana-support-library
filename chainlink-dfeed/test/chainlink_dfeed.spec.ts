@@ -33,7 +33,7 @@ describe('chainlink_dfeed_local_test', function() {
   })
 
   it('create feed', async function() {
-    await ChainlinkDfeedService.cteateFeed(
+    await ChainlinkDfeedService.createFeed(
       connection,
       defaultAccount,
       randomFeedName,
