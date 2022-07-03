@@ -1,6 +1,6 @@
 {
   "name": "@coin98/chainlink-dfeed-js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Dummy price feed for simulating Chainlink for testing on localhost",
   "main": "index.js",
   "author": "Coin98",
