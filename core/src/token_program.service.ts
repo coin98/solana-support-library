@@ -47,6 +47,30 @@ export class TokenProgramService {
     return 0
   }
 
+  static async changeAuthority(
+    connection: Connection,
+    payerAccount: Keypair,
+    mintAddress: PublicKey,
+    authorityType: number,
+    authorityAddress: PublicKey,
+  ): Promise<boolean> {
+    const transaction = new Transaction()
+
+    const changeAuthorityInstruction = TokenProgramInstructionService.changeAuthority(
+      payerAccount.publicKey,
+      mintAddress,
+      authorityType,
+      authorityAddress,
+    )
+    transaction.add(changeAuthorityInstruction)
+
+    const txSign = await sendAndConfirmTransaction(connection, transaction, [
+      payerAccount,
+    ])
+    console.info(`Changed authority of ${mintAddress.toBase58()} to ${authorityAddress.toBase58()}`, '---', txSign, '\n')
+    return true
+  }
+
   static async createTokenAccount(
     connection: Connection,
     payerAccount: Keypair,
