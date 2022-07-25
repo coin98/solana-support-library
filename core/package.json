@@ -1,6 +1,6 @@
 {
   "name": "@coin98/solana-support-library",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Solana Support Library for web3.js",
   "author": "Lukaz",
   "license": "Apache-2.0",
@@ -34,7 +34,7 @@
     "@types/mz": "^2.7.4",
     "@types/numeral": "^2.0.2",
     "@types/yaml": "^1.9.7",
-    "typescript": "^4.7.2"
+    "typescript": "^4.7.4"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@coin98"
