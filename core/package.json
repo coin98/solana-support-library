@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "tsc --build",
-    "test": "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/*.spec.ts"
+    "test": "ts-mocha -p ./tsconfig.json -t 1000000 tests/*.spec.ts"
   },
   "repository": {
     "type": "git",
