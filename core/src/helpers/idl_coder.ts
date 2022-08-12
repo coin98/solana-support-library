@@ -1,11 +1,13 @@
 import * as borsh from "@project-serum/borsh";
+import { Layout } from "buffer-layout";
 import camelCase from "camelcase";
+import { IdlTypeDef } from "../types/idl";
 
 export class IdlCoder {
   public static fieldLayout(
     field: { name?: string } & Pick<any, "type">,
-    types?: any[]
-  ): any {
+    types?: IdlTypeDef[]
+  ): Layout {
     const fieldName =
       field.name !== undefined ? camelCase(field.name) : undefined;
     switch (field.type) {
@@ -110,10 +112,10 @@ export class IdlCoder {
   }
 
   public static typeDefLayout(
-    typeDef: any,
-    types: any[] = [],
+    typeDef: IdlTypeDef,
+    types: IdlTypeDef[] = [],
     name?: string
-  ): any {
+  ): Layout {
     if (typeDef.type.kind === "struct") {
       const fieldLayouts = typeDef.type.fields.map((field: any) => {
         const x = IdlCoder.fieldLayout(field, types);
