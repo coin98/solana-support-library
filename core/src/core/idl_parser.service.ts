@@ -1,6 +1,7 @@
 import * as borsh from "@project-serum/borsh";
 import { Layout } from "buffer-layout";
 import camelCase from "camelcase";
+import { snakeCase } from "snake-case";
 import { AccountMeta, PublicKey, TransactionInstruction } from "@solana/web3.js"
 import { BorshService } from "./borsh.service";
 import { IdlCoder } from "../helpers/idl_coder";
@@ -61,7 +62,7 @@ export class IdlParserService {
     idl.instructions.map((inx: IdlInstruction) => {
       const inxImplement: BuildInstructionFunction = (args: any, ctx: any, programId: PublicKey): TransactionInstruction => {
         const layout = this.ixLayout.get(inx.name);
-        const data = BorshService.anchorSerialize(inx.name, layout, args, 1000)
+        const data = BorshService.anchorSerialize(snakeCase(inx.name), layout, args, 1000)
         const keys: AccountMeta[] = inx.accounts.map((item: IdlAccount) => <AccountMeta>{ pubkey: ctx[item.name], isWritable: item.isMut, isSigner: item.isSigner})
 
         if (ctx.remainingAccounts) {

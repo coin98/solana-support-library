@@ -1,6 +1,7 @@
 import { IdlParserService } from "../src"
 import assert from 'assert';
 import { PublicKey } from "@solana/web3.js";
+import { Idl } from "@project-serum/anchor";
 
 const idlTest = {
   "version": "0.1.0",
@@ -22,29 +23,21 @@ const idlTest = {
       ],
       "args": [
         {
+          "name": "name1",
+          "type": "bytes"
+        },
+        {
           "name": "name",
           "type": "publicKey"
+        },
+        {
+          "name": "number",
+          "type": "u8"
         },
       ]
     }
   ],
   "accounts": [
-    {
-      "name": "Hello",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "nonce",
-            "type": "u8"
-          },
-          {
-            "name": "userName",
-            "type": "publicKey"
-          },
-        ]
-      }
-    }
   ],
   "errors": [
     {
@@ -56,18 +49,22 @@ const idlTest = {
 }
 
 describe("Test idl parser service", () => {
+  /* 
   it("Construction idl parser", () => {
-    const parser = new IdlParserService(idlTest) as any
+    const parser = new IdlParserService(idlTest as Idl) as any
 
     assert(typeof parser.helloWorld === "function")
-    assert(typeof parser.decodeHelloAccount === "function")
+    // assert(typeof parser.decodeHelloAccount === "function")
   })
+  */
 
   it("Create instruction", () => {
-    const parser = new IdlParserService(idlTest) as any
+    const parser = new IdlParserService(idlTest as Idl) as any
+    console.log(parser.ixLayout.get("helloWorld"))
 
     const request = {
-      name: new PublicKey("5UrM9csUEDBeBqMZTuuZyHRNhbRW4vQ1MgKJDrKU1U2v")
+      name: new PublicKey("5UrM9csUEDBeBqMZTuuZyHRNhbRW4vQ1MgKJDrKU1U2v"),
+      name1: Buffer.from("hello")
     }
 
     const context = {
@@ -81,6 +78,6 @@ describe("Test idl parser service", () => {
       new PublicKey("5UrM9csUEDBeBqMZTuuZyHRNhbRW4vQ1MgKJDrKU1U2v")
     )
 
-    console.log(instruction)
+    // console.log(instruction)
   })
 })
