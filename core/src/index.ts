@@ -9,3 +9,4 @@ export { SystemProgramService } from './system_program.service'
 export { TokenProgramService } from './token_program.service'
 export { ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID, AuthorityTypes, INITIALIZE_ACCOUNT_SPAN, INITIALIZE_MINT_SPAN, TokenAccountInfo, TokenMintInfo, TokenProgramInstructionService, TOKEN_PROGRAM_ID } from './token_program_instruction.service'
 export { IdlParserService } from "./core/idl_parser.service"
+export { DurableNonceService } from "./durable_nonce.service"
