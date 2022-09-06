@@ -1,6 +1,5 @@
 import { Connection, Keypair, NonceAccount, NONCE_ACCOUNT_LENGTH, PublicKey, sendAndConfirmTransaction, SystemProgram, Transaction } from "@solana/web3.js";
 
-
 export class DurableNonceService {
   static async createNonceAccount(
     connection: Connection,
