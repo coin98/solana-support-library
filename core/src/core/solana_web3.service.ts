@@ -26,7 +26,7 @@ export async function sendTransaction(
   signers: Signer[],
 ): Promise<string> {
   try {
-    return sendAndConfirmTransaction(
+    return await sendAndConfirmTransaction(
       connection,
       transaction,
       signers,
