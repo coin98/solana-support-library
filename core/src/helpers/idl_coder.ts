@@ -10,7 +10,6 @@ export class IdlCoder {
   ): Layout {
     const fieldName =
       field.name !== undefined ? camelCase(field.name) : undefined;
-    console.log(field)
     switch (field.type) {
       case "bool": {
         return borsh.bool(fieldName);
