@@ -255,21 +255,21 @@ export class TokenProgramService {
     let recipientTokenAddress: PublicKey = recipientAddress
     let createATAInstruction: TransactionInstruction = null
     const recepientType = await this.checkAddressType(connection, recipientAddress)
-    if (recepientType === 1) {
+    if (recepientType === 0 || recepientType === 1) {
       const associatedTokenAccountAddress = this.findAssociatedTokenAddress(
         recipientAddress,
         tokenMintAddress,
-      )
+      );
       if (!await SolanaService.isAddressInUse(connection, associatedTokenAccountAddress)) {
         createATAInstruction = TokenProgramInstructionService.createAssociatedTokenAccount(
           payerAddress,
           recipientAddress,
           tokenMintAddress,
-        )
+        );
       }
-      recipientTokenAddress = associatedTokenAccountAddress
+      recipientTokenAddress = associatedTokenAccountAddress;
     }
-    return [recipientTokenAddress, createATAInstruction]
+    return [recipientTokenAddress, createATAInstruction];
   }
 
   static async getTokenAccountInfo(
