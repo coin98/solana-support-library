@@ -1,7 +1,22 @@
-import { Connection, Keypair, PublicKey, sendAndConfirmTransaction, SystemProgram, Transaction, TransactionInstruction } from '@solana/web3.js'
-import BN from 'bn.js'
-import { SolanaService } from './solana.service'
-import { INITIALIZE_ACCOUNT_SPAN, INITIALIZE_MINT_SPAN, TokenAccountInfo, TokenMintInfo, TokenProgramInstructionService, TOKEN_PROGRAM_ID } from './token_program_instruction.service'
+import {
+  Connection,
+  Keypair,
+  PublicKey,
+  sendAndConfirmTransaction,
+  SystemProgram,
+  Transaction,
+  TransactionInstruction
+} from '@solana/web3.js';
+import BN from 'bn.js';
+import { SolanaService } from './core/solana.service';
+import {
+  INITIALIZE_ACCOUNT_SPAN,
+  INITIALIZE_MINT_SPAN,
+  TokenAccountInfo,
+  TokenMintInfo,
+  TokenProgramInstructionService,
+  TOKEN_PROGRAM_ID
+} from './token_program_instruction.service';
 
 export class TokenProgramService {
 

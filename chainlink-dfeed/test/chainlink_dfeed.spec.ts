@@ -1,18 +1,18 @@
-import { SolanaConfigService } from '@coin98/solana-support-library/config'
+import { SolanaConfigService } from '@coin98/solana-support-library/config';
 import {
   Connection,
   Keypair,
   PublicKey
-} from '@solana/web3.js'
-import { BN } from 'bn.js'
-import { ChainlinkDfeedService } from '../services/chainlink_dfeed.service'
+} from '@solana/web3.js';
+import BN from 'bn.js';
+import { ChainlinkDfeedService } from '../services/chainlink_dfeed.service';
 import {
   ChainkDfeedInstructionService,
   ScopeDecimals,
   ScopeDescription,
   ScopeLatestRoundData,
   ScopeVersion
-} from '../services/chainlink_dfeed_instruction.service'
+} from '../services/chainlink_dfeed_instruction.service';
 
 describe('chainlink_dfeed_local_test', function() {
 
