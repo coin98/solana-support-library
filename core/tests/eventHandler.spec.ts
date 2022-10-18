@@ -59,36 +59,6 @@ const idlTest = {
   ]
 }
 
-describe("Test idl parser service", () => {
-  /* 
-  it("Construction idl parser", () => {
-    const parser = new IdlParserService(idlTest as Idl) as any
+describe("Test Event Handler", () => {
 
-    assert(typeof parser.helloWorld === "function")
-    // assert(typeof parser.decodeHelloAccount === "function")
-  })
-  */
-
-  it("Create instruction", () => {
-    const parser = new IdlParserService(idlTest as Idl) as any
-    console.log(parser)
-
-    const request = {
-      name: new PublicKey("5UrM9csUEDBeBqMZTuuZyHRNhbRW4vQ1MgKJDrKU1U2v"),
-      name1: Buffer.from("hello")
-    }
-
-    const context = {
-      user: new PublicKey("5UrM9csUEDBeBqMZTuuZyHRNhbRW4vQ1MgKJDrKU1U2v"),
-      helloAccount: new PublicKey("5UrM9csUEDBeBqMZTuuZyHRNhbRW4vQ1MgKJDrKU1U2v")
-    }
-
-    parser.helloWorld(
-      request,
-      context,
-      new PublicKey("5UrM9csUEDBeBqMZTuuZyHRNhbRW4vQ1MgKJDrKU1U2v")
-    )
-
-    // console.log(instruction)
-  })
 })
