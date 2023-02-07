@@ -1,6 +1,7 @@
 import {
   ConfirmOptions,
   Connection,
+  Keypair,
   PublicKey,
   sendAndConfirmRawTransaction,
   sendAndConfirmTransaction,
@@ -167,4 +168,21 @@ async function handleRpcError(
   const txSign = extractTxSignMatch.at(1);
   const transactionLog = await SolanaService.getTransactionLogMessages(connection, txSign);
   return transactionLog;
+}
+
+export function distinctSigners(
+  signers: Keypair[]
+): Keypair[] {
+  const addresses: string[] = [];
+  const results: Keypair[] = [];
+
+  for(const signer of signers) {
+    const address = signer.publicKey.toBase58();
+    if(addresses.indexOf(address) === -1) {
+      addresses.push(signer.publicKey.toBase58());
+      results.push(signer);
+    }
+  }
+
+  return results;
 }

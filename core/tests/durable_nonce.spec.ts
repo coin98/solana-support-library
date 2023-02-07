@@ -1,6 +1,6 @@
-import { Connection, Keypair, PublicKey, sendAndConfirmRawTransaction, sendAndConfirmTransaction, SystemProgram, Transaction } from "@solana/web3.js";
-import { SolanaConfigService } from "../src/config"
-import { DurableNonceService } from "../src"
+import { Connection, Keypair, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
+import { DurableNonceService } from "../src";
+import { SolanaConfigService } from "../src/config";
 
 describe("Test durable nonce service", () => {
   let connection: Connection

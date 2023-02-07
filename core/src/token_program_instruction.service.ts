@@ -292,19 +292,19 @@ export class TokenProgramInstructionService {
   }
 
   static changeAuthority(
-    payerAddress: PublicKey,
+    authorityAddress: PublicKey,
     mintAddress: PublicKey,
     authorityType: number,
-    authorityAddress: PublicKey | null,
+    newAuthorityAddress: PublicKey | null,
   ): TransactionInstruction {
     const request = <ChangeAuthorityRequest>{
       instruction: 6,
       type: authorityType,
-      authority: authorityAddress,
+      authority: newAuthorityAddress,
     }
     const keys: AccountMeta[] = [
       <AccountMeta>{ pubkey: mintAddress, isSigner: false, isWritable: true },
-      <AccountMeta>{ pubkey: payerAddress, isSigner: true, isWritable: false },
+      <AccountMeta>{ pubkey: authorityAddress, isSigner: true, isWritable: false },
     ]
     const data = BorshService.serialize(CHANGE_AUTHORITY_LAYOUT, request, 100)
 
