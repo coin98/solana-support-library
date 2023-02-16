@@ -1,8 +1,8 @@
 {
   "name": "@coin98/solana-support-library",
-  "version": "0.6.0",
+  "version": "0.10.0",
   "description": "Solana Support Library for web3.js",
-  "author": "Coin98",
+  "author": "Coin98 Labs",
   "license": "Apache-2.0",
   "main": "index.js",
   "types": "index.d.ts",
