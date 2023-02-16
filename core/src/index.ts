@@ -4,7 +4,7 @@ export { Ed25519SignService } from './core/ed25519_sign.service';
 export { HashService } from './core/hash.service';
 export { IdlParserService } from './core/idl_parser.service';
 export { InstructionLog, ProgramLogCategory, SignatureTuple, TransactionLog } from './core/interfaces';
-export { MerkleNode, MerkleTree } from './core/merkle_tree';
+export { MerkleNode, MerkleTreeKeccak, MerkleTreeSha256 } from './core/merkle_tree';
 export { SolanaService } from './core/solana.service';
 export { DEFAULT_PUBKEY, getProgramReturn, sendRawTransaction, sendRawTransaction2, sendTransaction, sendTransaction2 } from './core/solana_web3.service';
 export { DurableNonceService } from './durable_nonce.service';
